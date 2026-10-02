@@ -48,8 +48,8 @@ The reproduced results show the same general relationship demonstrated in Figure
 ![Leaky ReLU Extension](output/uncertainty_fig3_leaky_relu.png)
 
 ## Discussion, Limitations, & Results
-For my unique extension, I decided to use an activation function that was not tested in the paper. The additional activation function I chose for the NNGP implementation is Leaky ReLU. A standard ReLU outputs a zero value for all negative inputs, meanwhile a Leaky ReLU allows a small negative slope. The goal for using this activation is to determine whether the relationship between predictive uncertainty and prediction error from Figure 3 would still appear. 
-	For Leaky ReLU, I used an alpha level of 0.1 which multiplies negative inputs by this alpha value. In the code under uncertainty_plot.py, I added the Leaky ReLU activation function using tf.nn.leaky_relu(x, alpha = 0.1). Since NNGP kernel accepts a TensorFlow function, I could pass Leaky ReLU directly as the nonlinearity component without having to re-code the algorithm. I decided to keep the same setup as the original experiment to compare the difference in relationships between the different activation functions. During this unique extension, I came across an issue where there was not a precomputed grid for Leaky ReLU. The grid is the precomputed numerical lookup table used to make the NNGP kernel calculations. When my computer tried to generate one for Leaky ReLU, it came across a memory issue and failed. To fix this problem, I reduced the grid settings from 501 Gaussian quadrature points, 501 variance points, and 500 correlation points to 101 Gaussian quadrature points, 101 variance points, and 100 correlation points.
+	For my unique extension, I decided to use an activation function that was not tested in the paper. The additional activation function I chose for the NNGP implementation is Leaky ReLU. A standard ReLU outputs a zero value for all negative inputs, meanwhile a Leaky ReLU allows a small negative slope. The goal for using this activation is to determine whether the relationship between predictive uncertainty and prediction error from Figure 3 would still appear. 
+	For Leaky ReLU, I used an alpha level of 0.1 which multiplies negative inputs by this alpha value. In the code under uncertainty_plot.py, I added the Leaky ReLU activation function using tf.nn.leaky_relu(x, alpha = 0.1). Since NNGP kernel accepts a TensorFlow function, I could pass Leaky ReLU directly as the nonlinearity component without having to re-code the algorithm. I kept the experimental setup consistent with my Figure 3 reproduction so that I could compare the relationship between predictive uncertainty and prediction error when using Leaky ReLU rather than the original activation functions. During this unique extension, I came across an issue where there was not a precomputed grid for Leaky ReLU. The grid is the precomputed numerical lookup table used to make the NNGP kernel calculations. When my computer tried to generate one for Leaky ReLU, it came across a memory issue and failed. To fix this problem, I reduced the grid settings from 501 Gaussian quadrature points, 501 variance points, and 500 correlation points to 101 Gaussian quadrature points, 101 variance points, and 100 correlation points.
 	The Leaky ReLU figure that I generated showed a strong positive correlation between the predicted variance and the mean squared error and a correlation of approximately 0.9859 across the binned observations. This tells us that the model reported more uncertainty on groups where it made larger errors. Therefore, for this experiment, the Leaky ReLU NNGP showed a strong relationship between predictive uncertainty and prediction error. The relationship in the original Figure 3 from the paper is similar to the relationship using Leaky ReLU in this MNIST experiment. 
 
 ### Running the Leaky ReLU Extension
@@ -77,8 +77,7 @@ This generates the Leaky ReLU extension figure at:
 ```text
 output/uncertainty_fig3_leaky_relu.png
 ```
-
-# NNGP: Deep Neural Network Kernel for Gaussian Process
+## Original Repository README
 
 TensorFlow open source implementation of
 
