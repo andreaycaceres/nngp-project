@@ -11,39 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-r"""Reproduce Figure 3 of "Deep Neural Networks as Gaussian Processes"
-(Lee et al., ICLR 2018, https://arxiv.org/abs/1711.00165).
 
-Figure 3 shows that the NNGP's per-test-point predictive uncertainty (the
-posterior variance) is highly correlated with its actual squared error, once
-points are binned by predicted variance and averaged in groups of 100 (this
-averaging is what the paper's caption describes, and is what turns a noisy
-per-point scatter into the clean trend shown in the paper).
+# Figure 3 reproduction and Leaky ReLU extension for:
+# Lee et al. (2018), "Deep Neural Networks as Gaussian Processes."
+# Paper: https://arxiv.org/abs/1711.00165
+# Original code: https://github.com/brain-research/nngp
+# This script uses the original NNGP implementation for the Gaussian process
+# calculations. Figure 3 reproduction and Leaky ReLU extension were added
+# for this project.
 
-Usage (from inside the nngp/ directory, same as run_experiments.py):
-
-# Single nonlinearity (whatever --hparams specifies):
-python uncertainty_plot.py \
-    --num_train=1000 --num_eval=1000 \
-    --hparams='nonlinearity=relu,depth=10,weight_var=1.79,bias_var=0.83' \
-    --output_file=/nngp/uncertainty_fig3.png
-
-# Both nonlinearities in one plot, matching the paper's two-color figure
-# (depth/weight_var/bias_var below match the paper's Figure 3 caption):
-python uncertainty_plot.py \
-    --num_train=1000 --num_eval=1000 \
-    --hparams='depth=3,weight_var=2.0,bias_var=0.2' \
-    --nonlinearities='tanh,relu' \
-    --output_file=/nngp/uncertainty_fig3.png
-
-# CIFAR-10 instead of MNIST (uses a small CIFAR-10 loader defined in this
-# file, since the original repo's load_dataset.py only implements MNIST):
-python uncertainty_plot.py \
-    --dataset=cifar10 --num_train=1000 --num_eval=1000 \
-    --hparams='depth=3,weight_var=2.0,bias_var=0.2' \
-    --nonlinearities='tanh,relu' \
-    --output_file=/nngp/uncertainty_fig3_cifar.png
-"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
