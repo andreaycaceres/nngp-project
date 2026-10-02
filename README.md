@@ -22,8 +22,8 @@ The reproduction uses the MNIST dataset with 1,000 training examples and 1,000 e
 The experiment is fully containerized with Docker. From a clean clone of this repository, build and run the project with:
 
 ```bash
-git clone https://github.com/andreaycaceres/nngp-project2.git
-cd nngp-project2
+git clone https://github.com/andreaycaceres/nngp-project.git
+cd nngp-project
 docker build -t nngp-project .
 docker run nngp-project
 ```
