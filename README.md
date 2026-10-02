@@ -2,7 +2,7 @@
 
 This project reproduces the predictive uncertainty experiment from Figure 3 of Lee et al. (2018), *Deep Neural Networks as Gaussian Processes*. The experiment investigates whether the predictive uncertainty produced by a Neural Network Gaussian Process (NNGP) corresponds to actual prediction error.
 
-The reproduction uses the MNIST dataset with 1,000 training examples and 1,000 evaluation examples. Predictive variance and mean squared error are grouped into bins of 100 examples, following the Figure 3 experiment. Results are shown for the Tanh and ReLU nonlinearities.
+The reproduction uses the MNIST dataset with 1,000 training examples and 1,000 evaluation examples. Predictive variance and mean squared error are grouped into bins of 100 examples, producing 10 plotted observations for each activation function. Results are shown for the Tanh and ReLU nonlinearities. Because the original Figure 3 uses a larger evaluation set, my reproduction is less dense than the original figure. However, it still reproduces the positive relationship between predictive variance and prediction error.
 
 ## Figure 3 Reproduction
 
